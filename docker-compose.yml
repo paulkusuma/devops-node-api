@@ -6,6 +6,10 @@ services:
     container_name: devops-node-backend
     ports:
       - "3000:3000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    command: npm run dev
     restart: always
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
