@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Pull latest Docker image
-        run: docker pull pauwerfull/devops-node-api:latest
+        run: docker pull pauwerfull/devops-node-api:staging
 
       - name: Stop old container
         run: docker stop node-api || true
@@ -20,4 +20,4 @@ jobs:
         run: docker rm node-api || true
 
       - name: Run container
-        run: docker run -d -p 3000:3000 --name node-api pauwerfull/devops-node-api:latest
+        run: docker run -d -p 3000:3000 --name node-api pauwerfull/devops-node-api:staging
