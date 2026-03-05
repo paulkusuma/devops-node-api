@@ -24,5 +24,5 @@ jobs:
       run: docker build -t paulkusuma/devops-node-api:latest .
 
     - name: PUSH DOCKER IMAGE
-      run: docker push paulkusuma/devops-node-api:latest
+      run: docker push pauwerfull/devops-node-api:latest
 
