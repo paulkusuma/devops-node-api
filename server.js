@@ -2,8 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello from Dockerized Node API! UPDATE33 BRANCH DEV');
+app.get('/', (req, res) => {res.send('Hello from Dockerized Node API! UPDATE444 BRANCH DEV');
 });
 
 app.get('/health', (req, res) => {
