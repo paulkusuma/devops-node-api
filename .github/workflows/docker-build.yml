@@ -21,8 +21,12 @@ jobs:
         password: ${{secrets.DOCKER_PASSWORD}}
 
     - name: BUILD DOCKER IMAGE
-      run: docker build -t pauwerfull/devops-node-api:latest .
+      run: |
+        docker build -t pauwerfull/devops-node-api:${{github.sha}} .
+        docker tag pauwerfull/devops-node-api:${{github.sha}} pauwerfull/devops-node-api:staging
 
     - name: PUSH DOCKER IMAGE
-      run: docker push pauwerfull/devops-node-api:latest
+      run: |
+        docker push pauwerfull/devops-node-api:${{github.sha}}
+        docker push pauwerfull/devops-node-api:staging
 

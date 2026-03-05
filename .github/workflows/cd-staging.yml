@@ -1,4 +1,4 @@
-name: CD to Staging
+name: Deploy to Staging
 
 on:
   push:
@@ -6,20 +6,18 @@ on:
       - staging
 
 jobs:
-  deploy-staging:
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: self-hosted
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Pull latest Docker image
+        run: docker pull pauwerfull/devops-node-api:staging
 
-      - name: Build Docker image
-        run: docker build -t devops-node-api:staging .
+      - name: Stop old container
+        run: docker stop node-api || true
 
-      - name: Push Docker image (optional)
-        # nanti bisa push ke Docker Hub / GitHub Container Registry
-        run: echo "Push to registry here if needed"
+      - name: Remove old container
+        run: docker rm node-api || true
 
-      - name: Deploy to staging server (optional)
-        run: echo "Deploy steps here (SSH, Docker Compose up etc)"
-
+      - name: Run container
+        run: docker run -d -p 3000:3000 --name node-api pauwerfull/devops-node-api:staging
