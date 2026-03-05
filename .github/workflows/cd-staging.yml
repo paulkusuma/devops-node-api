@@ -1,0 +1,23 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Pull latest Docker image
+        run: docker pull pauwerfull/devops-node-api:latest
+
+      - name: Stop old container
+        run: docker stop node-api || true
+
+      - name: Remove old container
+        run: docker rm node-api || true
+
+      - name: Run container
+        run: docker run -d -p 3000:3000 --name node-api pauwerfull/devops-node-api:latest
